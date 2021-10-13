@@ -1,0 +1,11 @@
+{% extends "./base.html" %}
+{% block content %}
+    <a href="{% url "guest_create" %}"><button>Add Guest</button></a>
+    <table>
+    <tr><th>Name</th><th>VIP</th><th>Email</th><th></th><th></th></tr>
+{% for guest in guest_list %}
+    <tr><td>{{ guest.honorific }} {{ guest.first }} {{ guest.last }}</td><td>{% if guest.vip > 0 %}{{ guest.vip }}{% else %}Not Enrolled{%  endif %}</td>
+        <td>{{ guest.email }}</td><td><a href="{% url 'guest_update' guest.id %}"><button>Update</button></td></a><td><a href="{% url "guest_delete" guest.id %}"><button>Delete</button></a></td></tr>
+{% endfor %}
+    </table>
+{% endblock %}

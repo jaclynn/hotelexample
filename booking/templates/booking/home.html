@@ -1,0 +1,9 @@
+{% extends "./base.html" %}
+{% block content %}
+<h1>This is the Booking Application landing page</h1>
+<ul class="list-group">
+    {% for room in rooms %}
+  <li class="list-group-item">{{ room }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}

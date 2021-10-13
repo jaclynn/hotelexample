@@ -1,0 +1,9 @@
+{% extends "./base.html" %}
+{% block content %}
+    <table>
+    <tr><th>Room Number</th><th>Price</th><th>Occupied</th></tr>
+{% for room in room_list %}
+    <tr><td>{{ room.room_num }}</td> <td>{{ room.price }}</td><td>{% if room.occupied %}taken{% else %}available{%  endif %}</td></tr>
+{% endfor %}
+    </table>
+{% endblock %}
