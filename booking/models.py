@@ -27,25 +27,13 @@ class Room(models.Model):
     def __str__(self):
         return "Room #" + str(self.room_num)
 
+class Employee(models.Model):
+    first = models.CharField(max_length=20)
+    last  = models.CharField(max_length=20)
+    empid = models.IntegerField(default=-1)
 
-class Employee(models.Models):
-    # build out this model with 3-4 fields
-    # python manage.py makemigrations
-    # python manage.py migrate
-    # register this in admin.py
-    # add records via the admin page or in pycharms database tool
-    # Read - ListView
-    # Create - CreateView
-    # Update - UpdateView
-    # Delete = DeleteView
-    # The steps
-    # # create empty forms.py
-    # # create the class view in views.py
-    # # create the form class in forms.py for Create and Update
-    # # create the html file
-    # # create the route in urls.py
-    pass
-
+    def __str__(self):
+        return self.first + " " + self.last
 
 class Guest(models.Model):
     MR = 'MR'
@@ -69,3 +57,14 @@ class Guest(models.Model):
 
     def get_absolute_url(self):
         return '/guestlist'
+
+class Stay(models.Model):
+    roomid = models.ForeignKey(Room, on_delete=models.CASCADE)
+    guestid = models.ForeignKey(Guest, on_delete=models.CASCADE)
+    empid = models.ForeignKey(Employee, on_delete=models.CASCADE)
+    start = models.DateField(auto_now=False, auto_now_add=False)
+    end = models.DateField(auto_now=False, auto_now_add=False)
+    timestamp = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return self.guestid.first + " " + self.guestid.last + " staying " + str(self.start.month) + " " + str(self.start.day)
